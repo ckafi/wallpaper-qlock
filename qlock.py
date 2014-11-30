@@ -6,6 +6,7 @@ from datetime import datetime
 from time import sleep
 
 res_before = 2
+cache_path = os.path.expanduser('~/.cache/qlock/')
 
 def fuzzy_hour(time):
     translate = {
@@ -77,11 +78,13 @@ def assemble_clock(hour, minute):
         base.paste(image, (0,0), image)
         image.close()
 
-    base.save('clock.png')
+    base.save(cache_path + '/qlock.png')
     base.close()
 
 def main():
     os.chdir(os.path.abspath(os.path.dirname(__file__)))
+    if not os.path.exists(cache_path):
+        os.makedirs(cache_path)
     old_minute = []
     while True:
         now = datetime.today().time()
@@ -89,7 +92,7 @@ def main():
         minute = fuzzy_minute(now)
         if minute != old_minute:
             assemble_clock(hour, minute)
-            os.system('imlibsetroot --bg black -s h -p c clock.png')
+            os.system('imlibsetroot --bg black -s h -p c ' + cache_path + '/qlock.png')
             old_minute = minute
         sleep(60)
 
