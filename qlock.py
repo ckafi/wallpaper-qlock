@@ -60,19 +60,19 @@ def fuzzy_minute(time):
 
 
 def assemble_clock(hour, minute):
-    base = Image.open('base.png')
+    base = Image.open('images/base.png')
 
-    it_is = Image.open('it_is.png')
+    it_is = Image.open('images/it_is.png')
     base.paste(it_is, (0,0), it_is)
     it_is.close()
 
-    hour_fname = hour + '.png'
+    hour_fname = 'images/' + hour + '.png'
     hour_image = Image.open(hour_fname)
     base.paste(hour_image, (0,0), hour_image)
     hour_image.close()
 
     for word in minute:
-        fname = word + '.png'
+        fname = 'images/' + word + '.png'
         image = Image.open(fname)
         base.paste(image, (0,0), image)
         image.close()
