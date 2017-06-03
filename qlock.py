@@ -5,6 +5,7 @@ from PIL import Image
 from datetime import datetime
 from time import sleep
 
+interval = 60
 res_before = 2
 cache_path = os.path.expanduser('~/.cache/qlock/')
 
@@ -92,9 +93,9 @@ def main():
         minute = fuzzy_minute(now)
         if minute != old_minute:
             assemble_clock(hour, minute)
-            os.system('imlibsetroot --bg black -s h -p c ' + cache_path + '/qlock.png')
+            os.system('setroot --bg-color black ' + cache_path + '/qlock.png')
             old_minute = minute
-        sleep(60)
+        sleep(interval)
 
 if __name__ == "__main__":
     main()
